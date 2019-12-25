@@ -1,12 +1,12 @@
 {
   "autoload": {
     "psr-4": {
-      "App\\Geolocator": "src/"
+      "App\\Geolocator\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "App\\Geolocator\\Tests": "tests/"
+      "App\\Geolocator\\Tests\\": "tests/"
     }
   },
   "require-dev": {
