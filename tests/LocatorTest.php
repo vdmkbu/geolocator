@@ -3,7 +3,7 @@
 namespace App\Geolocator\Tests;
 
 use App\Geolocator\Http\HttpClient;
-use App\Geolocator\Locator;
+use App\Geolocator\Providers\IpGeoLocationLocators;
 use App\Geolocator\Types\Ip;
 use PHPUnit\Framework\TestCase;
 
@@ -19,7 +19,7 @@ class LocatorTest extends TestCase
             'city' => 'Mountain View'
         ]));
 
-        $locator = new Locator($client, 'e81b3531074e45cc830a7058da6e1620');
+        $locator = new IpGeoLocationLocators($client, 'e81b3531074e45cc830a7058da6e1620');
         $location = $locator->locate(new Ip('8.8.8.8'));
 
         self::assertNotNull($location);
