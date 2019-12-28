@@ -3,13 +3,13 @@
 namespace App\Geolocator\Tests;
 
 use App\Geolocator\ChainLocator;
-use App\Geolocator\Exceptions\ErrorHandler;
+use App\Geolocator\Exceptions\PsrLogErrorHandler;
 use App\Geolocator\Interfaces\Locator;
-use App\Geolocator\Log\Logger;
 use App\Geolocator\MuteChainLocator;
 use App\Geolocator\Types\Ip;
 use App\Geolocator\Types\Location;
 use PHPUnit\Framework\TestCase;
+use Psr\Log\LoggerInterface;
 
 class MuteChainLocatorTest extends TestCase
 {
@@ -25,7 +25,9 @@ class MuteChainLocatorTest extends TestCase
 
         ];
 
-        $handler = new ErrorHandler(new Logger());
+        $logger = $client = $this->createMock(LoggerInterface::class);
+        $handler = new PsrLogErrorHandler($logger);
+
         $locator = new ChainLocator(
             new MuteChainLocator($locators[0], $handler),
             new MuteChainLocator($locators[1], $handler)

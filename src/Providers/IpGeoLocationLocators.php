@@ -3,17 +3,17 @@
 namespace App\Geolocator\Providers;
 
 
-use App\Geolocator\Http\HttpClient;
 use App\Geolocator\Interfaces\Locator;
 use App\Geolocator\Types\Ip;
 use App\Geolocator\Types\Location;
+use Psr\Http\Client\ClientInterface;
 
 class IpGeoLocationLocators implements Locator
 {
     private $client;
     private $apiKey;
 
-    public function __construct(HttpClient $client, string $apiKey)
+    public function __construct(ClientInterface $client, string $apiKey)
     {
         $this->client = $client;
         $this->apiKey = $apiKey;

@@ -3,16 +3,16 @@
 namespace App\Geolocator;
 
 
-use App\Geolocator\Cache\Cache;
 use App\Geolocator\Interfaces\Locator;
 use App\Geolocator\Types\Ip;
 use App\Geolocator\Types\Location;
+use Psr\SimpleCache\CacheInterface;
 
 class CacheLocator implements Locator
 {
     private $next, $cache, $prefix, $ttl;
 
-    public function __construct(Locator $next, Cache $cache, string $prefix, int $ttl)
+    public function __construct(Locator $next, CacheInterface $cache, string $prefix, int $ttl)
     {
         $this->next = $next;
         $this->cache = $cache;

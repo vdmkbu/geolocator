@@ -3,13 +3,13 @@
 namespace App\Geolocator\Exceptions;
 
 
-use App\Geolocator\Log\Logger;
+use Psr\Log\LoggerInterface;
 
-class ErrorHandler
+class PsrLogErrorHandler
 {
     private $logger;
 
-    public function __construct(Logger $logger)
+    public function __construct(LoggerInterface $logger)
     {
         $this->logger = $logger;
     }

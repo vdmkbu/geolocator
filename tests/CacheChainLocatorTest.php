@@ -2,16 +2,17 @@
 
 namespace App\Geolocator\Tests;
 
-use App\Geolocator\Cache\Cache;
+;
 use App\Geolocator\CacheLocator;
 use App\Geolocator\ChainLocator;
-use App\Geolocator\Exceptions\ErrorHandler;
+use App\Geolocator\Exceptions\PsrLogErrorHandler;
 use App\Geolocator\Interfaces\Locator;
-use App\Geolocator\Log\Logger;
 use App\Geolocator\MuteChainLocator;
 use App\Geolocator\Types\Ip;
 use App\Geolocator\Types\Location;
 use PHPUnit\Framework\TestCase;
+use Psr\Log\LoggerInterface;
+use Psr\SimpleCache\CacheInterface;
 
 class CacheChainLocatorTest extends TestCase
 {
@@ -27,8 +28,10 @@ class CacheChainLocatorTest extends TestCase
 
         ];
 
-        $handler = new ErrorHandler(new Logger());
-        $cache = new Cache();
+        $logger = $client = $this->createMock(LoggerInterface::class);
+        $handler = new PsrLogErrorHandler($logger);
+
+        $cache = $this->createMock(CacheInterface::class);
 
         $locator = new ChainLocator(
             new CacheLocator(
