@@ -1,6 +1,7 @@
 ### Usage
 ```
 git clone https://github.com/vdmkbu/geolocator.git
+composer install
 ```
 
 ##### Простое использование
